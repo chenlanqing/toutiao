@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nowcoder.dao.NewsDAO">
+    <!-- 表名 -->
+    <sql id="table">news</sql>
+    <!-- 查询的字段，包含主键 -->
+    <sql id="selectFields">id,title, link, image, like_count, comment_count,created_date,user_id</sql>
+    <!-- 插入或者修改的字段，不包含主键 -->
+    <sql id="insertFields">title, link, image, like_count, comment_count,created_date,user_id</sql>
+    <!-- 分页查询数据 -->
+    <select id="queryAllNews" resultType="com.nowcoder.model.News">
+        SELECT
+        <include refid="selectFields"/>
+        FROM
+        <include refid="table"/>
+
+        <if test="userId != 0 and userId != null">
+            WHERE user_id = #{userId}
+        </if>
+        ORDER BY created_date DESC
+        LIMIT #{offset},#{limit}
+    </select>
+    <!-- 插入单条数据 -->
+    <insert id="insertOne" parameterType="com.nowcoder.model.News">
+        INSERT INTO
+          <include refid="table"/>
+        (<include refid="insertFields"/>)
+        VALUES (
+          #{title},
+          #{link},
+          #{image},
+          #{likeCount},
+          #{commentCount},
+          <choose>
+              <when test="createdDate != null">
+                  #{createdDate},
+              </when>
+              <otherwise>
+                SYSDATE(),
+              </otherwise>
+          </choose>
+          #{userId}
+        )
+    </insert>
+    <!--  批量插入数据 -->
+    <insert id="insertMany" parameterType="java.util.List">
+        INSERT INTO
+          <include refid="table"/>
+        (<include refid="insertFields"/>)
+        VALUES
+        <foreach collection="list" separator="," item="news">
+            (
+            #{news.title},
+            #{news.link},
+            #{news.image},
+            #{news.likeCount},
+            #{news.commentCount},
+            SYSDATE(),
+            #{news.userId}
+            )
+        </foreach>
+    </insert>
+
+    <delete id="">
+
+    </delete>
+</mapper>
