@@ -2,14 +2,15 @@ package com.nowcoder.controller;
 
 import com.nowcoder.model.News;
 import com.nowcoder.model.ViewObject;
-import com.nowcoder.service.NewsService;
-import com.nowcoder.service.UserService;
+import com.nowcoder.service.impl.NewsService;
+import com.nowcoder.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +40,9 @@ public class HomeController {
     }
 
     @RequestMapping(path = {"/", "/index"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public String home(Model model){
+    public String home(Model model, @RequestParam(value = "pop", defaultValue = "0") int pop){
         model.addAttribute("vos", getNews(0,0,10));
+        model.addAttribute("pop", pop);
         return "home";
     }
 

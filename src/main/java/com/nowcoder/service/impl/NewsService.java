@@ -1,7 +1,8 @@
-package com.nowcoder.service;
+package com.nowcoder.service.impl;
 
 import com.nowcoder.dao.NewsDAO;
 import com.nowcoder.model.News;
+import com.nowcoder.service.INewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * Created by BlueFish on 2016/7/3.
  */
 @Service
-public class NewsService {
+public class NewsService implements INewsService{
 
     @Autowired
     private NewsDAO newsDAO;

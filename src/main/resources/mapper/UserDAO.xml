@@ -18,6 +18,17 @@
             AND id = #{id}
         </if>
     </select>
+    <!-- 按名称查找用户 -->
+    <select id="queryUserByName" resultType="com.nowcoder.model.User">
+        SELECT
+        <include refid="selectFields"/>
+        FROM
+        <include refid="table"/>
+        WHERE 1=1
+        <if test="name != null">
+            AND name = #{name}
+        </if>
+    </select>
     <!-- 插入单条数据 -->
     <insert id="insertUser" parameterType="com.nowcoder.model.User" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO

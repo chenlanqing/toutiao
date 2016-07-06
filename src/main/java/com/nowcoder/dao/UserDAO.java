@@ -39,4 +39,12 @@ public interface UserDAO {
      * @return
      */
     int deleteUser(@Param("id") int id);
+
+    /**
+     * 按名称查找用户
+     * @param name
+     * @return
+     */
+    User queryUserByName(String name);
+
 }
