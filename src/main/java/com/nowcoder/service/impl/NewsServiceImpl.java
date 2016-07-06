@@ -12,7 +12,7 @@ import java.util.List;
  * Created by BlueFish on 2016/7/3.
  */
 @Service
-public class NewsService implements INewsService{
+public class NewsServiceImpl implements INewsService{
 
     @Autowired
     private NewsDAO newsDAO;

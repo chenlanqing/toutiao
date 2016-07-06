@@ -13,10 +13,16 @@
         <include refid="selectFields"/>
         FROM
         <include refid="table"/>
-        WHERE 1=1
-        <if test="id != 0">
-            AND id = #{id}
-        </if>
+        WHERE id = #{id}
+    </select>
+
+    <select id="queryUserList" resultType="com.nowcoder.model.User">
+        SELECT
+        <include refid="selectFields"/>
+        FROM
+        <include refid="table"/>
+        ORDER BY id DESC
+        LIMIT #{offset},#{limit}
     </select>
     <!-- 按名称查找用户 -->
     <select id="queryUserByName" resultType="com.nowcoder.model.User">
@@ -62,7 +68,7 @@
                 salt = #{salt},
             </if>
             <if test="headUrl != null and headUrl != ''">
-                headUrl = #{headUrl}
+                head_url = #{headUrl}
             </if>
         </set>
         WHERE
