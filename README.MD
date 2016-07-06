@@ -1,1 +1,2 @@
-This is a daily practice.
+#This is a daily practice.
+#About daily news.
