@@ -1,5 +1,6 @@
 package com.nowcoder.controller;
 
+import com.nowcoder.model.HostHolder;
 import com.nowcoder.model.News;
 import com.nowcoder.model.ViewObject;
 import com.nowcoder.service.INewsService;
@@ -29,6 +30,9 @@ public class HomeController {
     @Autowired
     private IUserService userServiceImpl;
 
+    @Autowired
+    private HostHolder hostHolder;
+
     private List<ViewObject> getNews(int userId, int offset, int limit) {
         List<News> newsList = newsServiceImpl.queryNews(userId, offset, limit);
         List<ViewObject> vos = new ArrayList<>();
@@ -44,6 +48,9 @@ public class HomeController {
     @RequestMapping(path = {"/", "/index"}, method = {RequestMethod.GET, RequestMethod.POST})
     public String home(Model model, @RequestParam(value = "pop", defaultValue = "0") int pop){
         model.addAttribute("vos", getNews(0,0,10));
+        if (hostHolder.getUser() != null ){
+            pop = 0;
+        }
         model.addAttribute("pop", pop);
         return "home";
     }

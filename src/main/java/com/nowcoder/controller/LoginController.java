@@ -1,5 +1,6 @@
 package com.nowcoder.controller;
 
+import com.nowcoder.service.ILoginTicketService;
 import com.nowcoder.service.IUserService;
 import com.nowcoder.util.CommonUtils;
 import org.slf4j.Logger;
@@ -7,10 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +23,9 @@ public class LoginController {
 
     @Autowired
     private IUserService userServiceImpl;
+
+    @Autowired
+    private ILoginTicketService loginTicketServiceImpl;
 
     @RequestMapping(value = "/reg/", method = {RequestMethod.POST})
     @ResponseBody
@@ -75,6 +76,17 @@ public class LoginController {
             LOGGER.error("登录失败", e);
             return CommonUtils.getJSONString(1, "登录失败");
         }
+    }
 
+    @RequestMapping(value="/logout",method = {RequestMethod.GET,RequestMethod.POST})
+    public String logout(@CookieValue("ticket")String ticket,
+                         HttpServletResponse response){
+        // 将 ticket 状态置为1
+        loginTicketServiceImpl.updateTicket(ticket, 1);
+        // 删除页面上的 cookie
+        Cookie cookie = new Cookie("ticket", null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return "redirect:/";
     }
 }

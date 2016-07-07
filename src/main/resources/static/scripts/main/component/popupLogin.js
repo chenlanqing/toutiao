@@ -61,6 +61,7 @@
                 }).done(function (oResult) {
                     if (oResult.code === 0) {
 //                        window.location.reload();
+                        window.location.href = "/";
                         that.emit('login');
                     } else {
                         oResult.msgname && that.iptError(that.emailIpt, oResult.msgname);

@@ -7,4 +7,5 @@ public interface ILoginTicketService {
 
     String addLoginTicket(int userId);
 
+    int updateTicket(String ticket, int status);
 }

@@ -30,4 +30,12 @@ public class LoginTicketServiceImpl implements ILoginTicketService {
         loginTicketDAO.insertOne(ticket);
         return ticket.getTicket();
     }
+
+    @Override
+    public int updateTicket(String ticket, int status) {
+        LoginTicket login = new LoginTicket();
+        login.setTicket(ticket);
+        login.setStatus(status);
+        return loginTicketDAO.updateTicket(login);
+    }
 }
