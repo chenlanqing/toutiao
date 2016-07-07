@@ -18,6 +18,7 @@
     <mappers>
         <mapper resource="mapper/NewsDAO.xml" />
         <mapper resource="mapper/UserDAO.xml" />
+        <mapper resource="mapper/LoginTicketDAO.xml" />
     </mappers>
     <!-- Continue going here -->
 </configuration>

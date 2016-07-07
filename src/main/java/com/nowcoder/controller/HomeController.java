@@ -2,8 +2,10 @@ package com.nowcoder.controller;
 
 import com.nowcoder.model.News;
 import com.nowcoder.model.ViewObject;
-import com.nowcoder.service.impl.NewsService;
-import com.nowcoder.service.impl.UserService;
+import com.nowcoder.service.INewsService;
+import com.nowcoder.service.IUserService;
+import com.nowcoder.service.impl.NewsServiceImpl;
+import com.nowcoder.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,18 +24,18 @@ import java.util.List;
 public class HomeController {
 
     @Autowired
-    private NewsService newsService;
+    private INewsService newsServiceImpl;
 
     @Autowired
-    private UserService userService;
+    private IUserService userServiceImpl;
 
     private List<ViewObject> getNews(int userId, int offset, int limit) {
-        List<News> newsList = newsService.queryNews(userId, offset, limit);
+        List<News> newsList = newsServiceImpl.queryNews(userId, offset, limit);
         List<ViewObject> vos = new ArrayList<>();
         for (News news : newsList) {
             ViewObject vo = new ViewObject();
             vo.set("news", news);
-            vo.set("user", userService.getUser(news.getUserId()));
+            vo.set("user", userServiceImpl.getUser(news.getUserId()));
             vos.add(vo);
         }
         return vos;

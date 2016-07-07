@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nowcoder.dao.LoginTicketDAO">
+    <!-- 表名 -->
+    <sql id="table">login_ticket</sql>
+    <!-- 查询的字段，包含主键 -->
+    <sql id="selectFields">id, user_id, expired, status, ticket</sql>
+    <!-- 插入或者修改的字段，不包含主键 -->
+    <sql id="insertFields">user_id, expired, status, ticket</sql>
+    <!-- 分页查询数据 -->
+    <select id="queryTicket" resultType="com.nowcoder.model.LoginTicket">
+        SELECT
+        <include refid="selectFields"/>
+        FROM
+        <include refid="table"/>
+        WHERE ticket = #{ticket}
+    </select>
+    <!-- 插入单条数据 -->
+    <insert id="insertOne" parameterType="com.nowcoder.model.LoginTicket">
+        INSERT INTO
+        <include refid="table"/>
+        (<include refid="insertFields"/>)
+        VALUES (
+        #{userId},
+        #{expired},
+        #{status},
+        #{ticket}
+        )
+    </insert>
+
+    <update id="updateTicket" parameterType="com.nowcoder.model.LoginTicket">
+      UPDATE
+        <include refid="table"/>
+      SET
+        status = #{status}
+      WHERE
+        ticket = #{ticket}
+
+    </update>
+</mapper>

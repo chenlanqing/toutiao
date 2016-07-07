@@ -17,7 +17,13 @@ public interface UserDAO {
      * @param id
      * @return
      */
-    List<User> queryUserById(@Param("id") int id);
+    User queryUserById(@Param("id") int id);
+
+    /**
+     * 查询所有数据
+     * @return
+     */
+    List<User> queryUserList(@Param("offset") int offset, @Param("limit") int limit);
 
     /**
      * 插入数据
@@ -45,6 +51,6 @@ public interface UserDAO {
      * @param name
      * @return
      */
-    User queryUserByName(String name);
+    User queryUserByName(@Param("name")String name);
 
 }

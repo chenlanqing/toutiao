@@ -23,11 +23,19 @@ public interface IUserService {
     public int addUser(User user);
 
     /**
-     *
+     * 注册信息
      * @param username
      * @param password
      * @return
      */
     public Map<String, Object> register(String username, String password);
+
+    /**
+     * 登录
+     * @param username
+     * @param password
+     * @return
+     */
+    public Map<String, Object> login(String username, String password);
 
 }
