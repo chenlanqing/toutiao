@@ -1,6 +1,7 @@
 package com.nowcoder.util;
 
 import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -83,6 +84,19 @@ public class CommonUtils {
             LOGGER.error("生成MD5失败", e);
             return null;
         }
+    }
+
+
+    public static boolean isAllowedUploadImage(String fileExt, String... fileExts){
+        if(StringUtils.isBlank(fileExt)){
+            return false;
+        }
+        for(String ext : fileExts){
+            if (fileExt.equals(ext)){
+                return true;
+            }
+        }
+        return false;
     }
 
 }

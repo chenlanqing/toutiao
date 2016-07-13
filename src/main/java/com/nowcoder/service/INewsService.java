@@ -1,6 +1,7 @@
 package com.nowcoder.service;
 
 import com.nowcoder.model.News;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -10,4 +11,7 @@ import java.util.List;
 public interface INewsService {
 
     public List<News> queryNews(int userId, int offset, int limit);
+
+
+    public String saveImage(MultipartFile file)throws Exception;
 }

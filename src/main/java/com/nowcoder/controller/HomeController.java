@@ -5,8 +5,6 @@ import com.nowcoder.model.News;
 import com.nowcoder.model.ViewObject;
 import com.nowcoder.service.INewsService;
 import com.nowcoder.service.IUserService;
-import com.nowcoder.service.impl.NewsServiceImpl;
-import com.nowcoder.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
